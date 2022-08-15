@@ -1,0 +1,141 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>계산기</title>
+</head>
+<body>
+    <div id="container">
+        <input readonly id="operator">
+        <input readonly type="number" id="result">
+        <div class="row">
+            <button id="num-7">7</button>
+            <button id="num-8">8</button>
+            <button id="num-9">9</button>
+            <button id="plus">+</button>
+        </div>
+        <div class="row">
+            <button id="num-4">4</button>
+            <button id="num-5">5</button>
+            <button id="num-6">6</button>
+            <button id="minus">-</button>
+        </div>
+        <div class="row">
+            <button id="num-1">1</button>
+            <button id="num-2">2</button>
+            <button id="num-3">3</button>
+            <button id="divide">/</button>
+        </div>
+        <div class="row">
+            <button id="clear">C</button>
+            <button id="num-0">0</button>
+            <button id="calculate">=</button>
+            <button id="multiply">x</button>
+        </div>
+    </div>
+</body>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+  const result = document.querySelector("#result"); // 결과창 나타내는 인풋창
+  const operator = document.querySelector("#operator"); // 연산자 창
+  const num0 = document.querySelector("#num-0");
+  const num1 = document.querySelector("#num-1");
+  const num2 = document.querySelector("#num-2");
+  const num3 = document.querySelector("#num-3");
+  const num4 = document.querySelector("#num-4");
+  const num5 = document.querySelector("#num-5");
+  const num6 = document.querySelector("#num-6");
+  const num7 = document.querySelector("#num-7");
+  const num8 = document.querySelector("#num-8");
+  const num9 = document.querySelector("#num-9");
+  const plus = document.querySelector("#plus"); // +
+  const minus = document.querySelector("#minus"); // -
+  const divide = document.querySelector("#divide"); // /
+  const multiply = document.querySelector("#multiply"); // *
+  const calculate = document.querySelector("#calculate"); // =
+  const clear = document.querySelector("#clear"); // c
+  let numOne = ""; // 첫번째 숫자 받을 변수
+  let numTwo = ""; // 두번째 숫자 받을 변수
+
+  //숫자를 클릭했을때의 이벤트
+
+  const clickNum = (e) => {
+    if (operator.value == "") {
+      // 연산자 칸이 비어있다면
+      numOne += e.target.textContent;
+      result.value += e.target.textContent;
+      console.log("resultValue" + result.value);
+    } else if (operator.value !== "") {
+      numTwo += e.target.textContent;
+      result.value += e.target.textContent;
+      console.log("resultValue2" + result.value);
+    }
+  };
+
+  // 연산자를 클릭했을때의 이벤트
+
+  const clickOperator = (e) => {
+    if (result.value == "") {
+      alert("숫자를 먼저 입력하세요!");
+    } else {
+      result.value = "";
+      operator.value = e.target.textContent;
+    }
+  };
+
+  const clickCalculate = () => {
+    if (operator.value == "+") {
+      result.value = Number(numOne) + Number(numTwo);
+      console.log("결과값은" + result.value);
+    }
+    if (operator.value == "-") {
+      result.value = numOne - numTwo;
+      console.log("결과값은" + result.value);
+    }
+    if (operator.value == "*") {
+      result.value = numOne * numTwo;
+      console.log("결과값은" + result.value);
+    }
+    if (operator.value == "/") {
+      result.value = numOne / numTwo;
+      console.log("결과값은" + result.value);
+    }
+  };
+
+  const setClear = () => {
+    result.value = "";
+    operator.value = "";
+    numOne = "";
+    numTwo = "";
+  };
+
+  num0.addEventListener("click", clickNum);
+  num1.addEventListener("click", clickNum);
+  num2.addEventListener("click", clickNum);
+  num3.addEventListener("click", clickNum);
+  num4.addEventListener("click", clickNum);
+  num5.addEventListener("click", clickNum);
+  num6.addEventListener("click", clickNum);
+  num7.addEventListener("click", clickNum);
+  num8.addEventListener("click", clickNum);
+  num9.addEventListener("click", clickNum);
+
+  plus.addEventListener("click", clickOperator);
+  minus.addEventListener("click", clickOperator);
+  divide.addEventListener("click", clickOperator);
+  multiply.addEventListener("click", clickOperator);
+
+  calculate.addEventListener("click", clickCalculate);
+  clear.addEventListener("click", setClear);
+});
+
+// = 버튼 눌렀을때, operator 창 초기화
+// 값 3개 받을수 있도록 해보기
+// 저 변수와 이벤트리스너들을 간결하게 나타내볼수는 없을까?
+</script>
+
+</html>
